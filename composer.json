@@ -1,0 +1,22 @@
+{
+    "name": "ruogoo/signature",
+    "description": "API signature for laravel.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HyanCat",
+            "email": "hyancat@live.cn"
+        }
+    ],
+    "require": {
+        "php": ">= 7.0",
+        "illuminate/support": "5.*",
+        "illuminate/console": "5.*",
+        "illuminate/database": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ruogoo\\Signature\\": "src/"
+        }
+    }
+}
