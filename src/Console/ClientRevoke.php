@@ -16,7 +16,7 @@ class ClientRevoke extends Command
     protected $signature = 'client:revoke {--key=}';
     protected $description = 'Revoke client\'s key and secret.';
 
-    public function fire()
+    public function fire(): void
     {
         $this->info('Not implement.');
     }

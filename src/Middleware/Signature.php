@@ -17,9 +17,6 @@ class Signature
 {
     public function handle($request, Closure $next)
     {
-        if (! env('API_SIGNATURE', false)) {
-            return $next($request);
-        }
         $passed = app(SignatureInterface::class)->validate($request);
         if ($passed) {
             return $next($request);

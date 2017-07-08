@@ -15,14 +15,14 @@ use Ruogoo\Signature\Console\ClientRevoke;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         $this->app->bind(SignatureInterface::class, function () {
             return new SignatureValidation();
         });
     }
 
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
 

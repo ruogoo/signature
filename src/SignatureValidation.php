@@ -13,6 +13,9 @@ use Ruogoo\Signature\Model\AppClient;
 
 class SignatureValidation implements SignatureInterface
 {
+    /**
+     * @var string
+     */
     protected $appKey;
 
     public function validate($request): bool
@@ -43,10 +46,9 @@ class SignatureValidation implements SignatureInterface
         if (! empty($body)) {
             $pieces[] = sha1($body);
         }
-        $joined    = implode('&', $pieces);
-        $signature = hash('sha256', $joined);
+        $joined = implode('&', $pieces);
 
-        return $signature;
+        return hash('sha256', $joined);
     }
 
     private function secretKey(): string
