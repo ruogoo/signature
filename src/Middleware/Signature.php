@@ -22,6 +22,6 @@ class Signature
             return $next($request);
         }
 
-        throw new SignatureException('签名错误');
+        throw new SignatureException('Signature invalid.');
     }
 }
