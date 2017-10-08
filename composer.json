@@ -18,5 +18,12 @@
         "psr-4": {
             "Ruogoo\\Signature\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ruogoo\\Signature\\ServiceProvider"
+            ]
+        }
     }
 }
