@@ -21,7 +21,7 @@ class SignatureValidation implements SignatureInterface
     public function validate($request): bool
     {
         // header 中取出签名字符串
-        $signatureInHeader = $request->header('X-Signature');
+        $signatureInHeader = $request->header(config('signature.header'));
         if (empty($signatureInHeader)) {
             return false;
         }
@@ -48,7 +48,7 @@ class SignatureValidation implements SignatureInterface
         }
         $joined = implode('&', $pieces);
 
-        return hash('sha256', $joined);
+        return hash(config('signature.hash_algorithm'), $joined);
     }
 
     private function secretKey(): string

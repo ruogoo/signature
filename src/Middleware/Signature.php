@@ -17,11 +17,13 @@ class Signature
 {
     public function handle($request, Closure $next)
     {
-        $passed = app(SignatureInterface::class)->validate($request);
-        if ($passed) {
-            return $next($request);
+        if (config('signature.enabled')) {
+            $passed = app(SignatureInterface::class)->validate($request);
+            if (! $passed) {
+                throw new SignatureException('Signature invalid.');
+            }
         }
 
-        throw new SignatureException('Signature invalid.');
+        return $next($request);
     }
 }

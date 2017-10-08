@@ -12,11 +12,16 @@ namespace Ruogoo\Signature;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 use Ruogoo\Signature\Console\ClientGenerate;
 use Ruogoo\Signature\Console\ClientRevoke;
+use Ruogoo\Signature\Middleware\Signature;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
+    protected $defer = true;
+
     public function register(): void
     {
+        $this->app['router']->aliasMiddleware('signature', Signature::class);
+
         $this->app->bind(SignatureInterface::class, function () {
             return new SignatureValidation();
         });
@@ -30,6 +35,10 @@ class ServiceProvider extends IlluminateServiceProvider
             $this->publishes([
                 __DIR__ . '/../database/migrations/' => database_path('migrations'),
             ], 'migrations');
+
+            $this->publishes([
+                __DIR__ . '/../config/signature.php' => config_path('signature.php'),
+            ], 'config');
 
             $this->commands([
                 ClientGenerate::class,
